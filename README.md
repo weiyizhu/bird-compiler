@@ -88,7 +88,7 @@
         <tr>
             <th>Feature</th>
             <th>Bird Program</th>
-            <th>Evaluate Result</th>
+            <th>Evaluated Result</th>
         </tr>
         <tr>
             <td>Arithmetic</td>
