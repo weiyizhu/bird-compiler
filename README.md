@@ -84,13 +84,118 @@
 ```
 
 ## Bird Features and Examples
-| Feature | Bird Program | Evaluated Result |
-| --- | --- | --- |
-| Arithmetic | <code>3 * (1 + (4 - 2) - (3 * 2))</code> | -9 |
-| Conditionals, <br>let-in, <br>unary and boolean <br>operations | <code>let x = <br>&nbsp;&nbsp;&nbsp;&nbsp;let y = 2 in <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;after(y) <br>in <br>let y = 3 in<br>if (x = y \|\| true) then <br>&nbsp;&nbsp;&nbsp;&nbsp;isbool(x) <br>else <br>&nbsp;&nbsp;&nbsp;&nbsp;isint(y)</code> | false |
-| First-order functions | <code>def g x =<br>&nbsp;&nbsp;&nbsp;&nbsp;x + 1<br>end<br><br>def f x y =<br>&nbsp;&nbsp;&nbsp;&nbsp;x y<br>end<br><br>f g 5</code> | 6 |
-| Tuples | <code>let t = (1,false,4) in<br>let n = 5 in<br>(istuple(t), istuple(n))</code> | (true, false) |
-| First-class functions | <code>def f x y =<br>&nbsp;&nbsp;x + y<br>end<br><br>let g = f in<br>g 2 4</code> | 6 | 
-| Partial application | <code>def multiply x y =<br>&nbsp;&nbsp;&nbsp;&nbsp;x * y<br>end<br><br>let double = multiply 2 in<br>double 3| 6 | 
-| Mark-Compact <br>garbage collection | <code>def cycle_tuple_memory n =<br>&nbsp;&nbsp;&nbsp;&nbsp;let x = (4, 5) in<br>&nbsp;&nbsp;&nbsp;&nbsp;if n &lt; 1 then<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br>&nbsp;&nbsp;&nbsp;&nbsp;else<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cycle_tuple_memory (n-1) +<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cycle_tuple_memory (n-1)<br>end<br><br>cycle_tuple_memory 20</code> | 1048576 |
-| Tail-call optimization | <code>def f x =<br>&nbsp;&nbsp;if x = 1 then 1 else f (x-1)<br>end<br><br>f 10000000</code> | 1 |
+<table>
+        <tr>
+            <th>Feature</th>
+            <th>Bird Program</th>
+            <th>Evaluate Result</th>
+        </tr>
+        <tr>
+            <td>Arithmetic</td>
+            <td>
+              <pre>3 * (1 + (4 - 2) - (3 * 2))</pre>
+            </td>
+            <td>-9</td>
+        </tr>
+        <tr>
+            <td>Conditionals, <br>let...in, <br>unary and boolean operations</td>
+            <td>
+              <pre>
+let x =
+    let y = 2 in after(y)
+in
+let y = 3 in
+if (x = y || true) then
+    isbool(x)
+else
+    isint(y)
+              </pre>
+            </td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>First-order functions</td>
+            <td>
+              <pre>
+def g x =
+    x + 1
+end
+&nbsp;&nbsp;&nbsp;&nbsp;
+def f x y =
+    x y
+end
+f g 5
+              </pre>
+            </td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>Tuples</td>
+            <td>
+              <pre>let t = (1,false,4) in
+let n = 5 in
+(istuple(t), istuple(n))
+              </pre>
+            </td>
+            <td>(true, false)</td>
+        </tr>
+        <tr>
+            <td>First-class functions</td>
+            <td>
+              <pre>
+def f x y =
+    x + y
+end
+&nbsp;&nbsp;&nbsp;&nbsp;
+let g = f in
+g 2 4
+              </pre>
+            </td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>Partial application</td>
+            <td>
+              <pre>
+def multiply x y =
+&nbsp;&nbsp;&nbsp;&nbsp;x * y
+end
+&nbsp;&nbsp;&nbsp;&nbsp;
+let double = multiply 2 in
+double 3
+              </pre>
+            </td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>Mark-Compact<br>garbage collection</td>
+            <td>
+              <pre>
+def cycle_tuple_memory n =
+&nbsp;&nbsp;&nbsp;&nbsp;let x = (4, 5) in
+&nbsp;&nbsp;&nbsp;&nbsp;if n < 1 then
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1
+&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cycle_tuple_memory (n-1) + 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cycle_tuple_memory (n-1)
+end
+&nbsp;&nbsp;&nbsp;&nbsp;
+cycle_tuple_memory 20
+              </pre>
+            </td>
+            <td>1048576</td>
+        </tr>
+        <tr>
+            <td>Tail-call optimization</td>
+            <td>
+              <pre>
+def f x =
+&nbsp;&nbsp;&nbsp;&nbsp;if x = 1 then 1 else f (x-1)
+end
+&nbsp;&nbsp;&nbsp;&nbsp;
+f 10000000
+              </pre>
+            </td>
+            <td>1</td>
+        </tr>
+</table>
